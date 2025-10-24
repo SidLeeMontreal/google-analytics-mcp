@@ -27,9 +27,9 @@ jobs:
       - name: Azure Login
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.GOOGLEANALYTICSMCP_AZURE_CLIENT_ID }}
-          tenant-id: ${{ secrets.GOOGLEANALYTICSMCP_AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.GOOGLEANALYTICSMCP_AZURE_SUBSCRIPTION_ID }}
+          client-id: ${{ secrets.AZURE_MCP_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_MCP_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_MCP_SUBSCRIPTION_ID }}
 
       - name: Build and push container image to registry
         uses: azure/container-apps-deploy-action@v2
@@ -37,9 +37,9 @@ jobs:
           appSourcePath: ${{ github.workspace }}
           _dockerfilePathKey_: _dockerfilePath_
           _targetLabelKey_: _targetLabel_
-          registryUrl: 
-          registryUsername: ${{ secrets.GOOGLEANALYTICSMCP_REGISTRY_USERNAME }}
-          registryPassword: ${{ secrets.GOOGLEANALYTICSMCP_REGISTRY_PASSWORD }}
+          registryUrl: ${{ secrets.REGISTRY_NAME }}
+          registryUsername: ${{ secrets.REGISTRY_USERNAME }}
+          registryPassword: ${{ secrets.REGISTRY_PASSWORD }}
           containerAppName: google-analytics-mcp
           resourceGroup: sidlee-mcp-prod
           imageToBuild: default/[parameters('containerAppName')]:${{ github.sha }}
